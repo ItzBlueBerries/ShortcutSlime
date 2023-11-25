@@ -87,15 +87,15 @@ namespace ShortcutSlimes.Data.Slimes
                         plortsToPatch.Add(new MarketUI.PlortEntry { identType = inDebtPlort });
                         valueMapsToPatch.Add(new EconomyDirector.ValueMap
                         {
-                            accept = enrichedPlort.prefab.GetComponent<Identifiable>(),
-                            fullSaturation = 1,
-                            value = 500
+                            Accept = enrichedPlort.prefab.GetComponent<Identifiable>(),
+                            FullSaturation = 1,
+                            Value = 500
                         });
                         valueMapsToPatch.Add(new EconomyDirector.ValueMap
                         {
-                            accept = inDebtPlort.prefab.GetComponent<Identifiable>(),
-                            fullSaturation = 1,
-                            value = -500
+                            Accept = inDebtPlort.prefab.GetComponent<Identifiable>(),
+                            FullSaturation = 1,
+                            Value = -500
                         });
                         #endregion
 
@@ -106,9 +106,9 @@ namespace ShortcutSlimes.Data.Slimes
                         // shortcutSlime.prefab.AddComponent<AutoDepositAssistance>();
                         shortcutSlime.prefab.AddComponent<DestroyOutsideHoursOfDay>();
                         shortcutSlime.prefab.GetComponent<Identifiable>().identType = shortcutSlime;
-                        shortcutSlime.prefab.GetComponent<SlimeEat>().slimeDefinition = shortcutSlime;
-                        shortcutSlime.prefab.GetComponent<PlayWithToys>().slimeDefinition = shortcutSlime;
-                        shortcutSlime.prefab.GetComponent<ReactToToyNearby>().slimeDefinition = shortcutSlime;
+                        shortcutSlime.prefab.GetComponent<SlimeEat>().SlimeDefinition = shortcutSlime;
+                        shortcutSlime.prefab.GetComponent<PlayWithToys>().SlimeDefinition = shortcutSlime;
+                        shortcutSlime.prefab.GetComponent<ReactToToyNearby>().SlimeDefinition = shortcutSlime;
 
                         shortcutSlime.Diet = UnityEngine.Object.Instantiate(Utility.Get<SlimeDefinition>("Pink")).Diet;
                         shortcutSlime.Diet.MajorFoodGroups = new SlimeEat.FoodGroup[] { SlimeEat.FoodGroup.MEAT };
@@ -116,6 +116,7 @@ namespace ShortcutSlimes.Data.Slimes
                         shortcutSlime.Diet.ProduceIdents = new IdentifiableType[] { enrichedPlort };
                         shortcutSlime.Diet.RefreshEatMap(SRSingleton<GameContext>.Instance.SlimeDefinitions, shortcutSlime);
 
+                        shortcutSlime.icon = Utility.CreateSprite(Utility.LoadImage("Files.Icons.shortcut_slime_ico"));
                         shortcutSlime.properties = UnityEngine.Object.Instantiate(Utility.Get<SlimeDefinition>("Pink").properties);
                         shortcutSlime.defaultPropertyValues = UnityEngine.Object.Instantiate(Utility.Get<SlimeDefinition>("Pink")).defaultPropertyValues;
 
@@ -149,7 +150,7 @@ namespace ShortcutSlimes.Data.Slimes
                         slimeAppearance.Structures[3].DefaultMaterials[0] = material2;
                         slimeAppearance.Structures[4].DefaultMaterials[0] = material3;
 
-                        slimeAppearance.Face = UnityEngine.Object.Instantiate(Utility.Get<SlimeAppearance>("CottonDefault").Face);
+                        slimeAppearance._face = UnityEngine.Object.Instantiate(Utility.Get<SlimeAppearance>("CottonDefault").Face);
                         slimeAppearance.Face.name = "ShortcutFace";
 
                         SlimeExpressionFace[] expressionFaces = new SlimeExpressionFace[0];
@@ -183,9 +184,9 @@ namespace ShortcutSlimes.Data.Slimes
                         slimeAppearance.Face.ExpressionFaces = expressionFaces;
                         slimeAppearance.Face.OnEnable();
 
-                        slimeAppearance.Icon = Utility.CreateSprite(Utility.LoadImage("Files.Icons.shortcut_slime_ico"));
-                        slimeAppearance.SplatColor = Color.black;
-                        slimeAppearance.ColorPalette = new SlimeAppearance.Palette
+                        slimeAppearance._icon = Utility.CreateSprite(Utility.LoadImage("Files.Icons.shortcut_slime_ico"));
+                        slimeAppearance._splatColor = Color.black;
+                        slimeAppearance._colorPalette = new SlimeAppearance.Palette
                         {
                             Ammo = Color.black,
                             Top = Color.black,
@@ -202,7 +203,7 @@ namespace ShortcutSlimes.Data.Slimes
                         SRSingleton<SceneContext>.Instance.SlimeAppearanceDirector.RegisterDependentAppearances(Utility.Get<SlimeDefinition>("Shortcut"), Utility.Get<SlimeDefinition>("Shortcut").AppearancesDefault[0]);
                         SRSingleton<SceneContext>.Instance.SlimeAppearanceDirector.UpdateChosenSlimeAppearance(Utility.Get<SlimeDefinition>("Shortcut"), Utility.Get<SlimeDefinition>("Shortcut").AppearancesDefault[0]);
                         SRSingleton<GameContext>.Instance.SlimeDefinitions.Slimes = SRSingleton<GameContext>.Instance.SlimeDefinitions.Slimes.AddItem(shortcutSlime).ToArray();
-                        SRSingleton<GameContext>.Instance.SlimeDefinitions.slimeDefinitionsByIdentifiable.TryAdd(shortcutSlime, shortcutSlime);
+                        SRSingleton<GameContext>.Instance.SlimeDefinitions._slimeDefinitionsByIdentifiable.TryAdd(shortcutSlime, shortcutSlime);
                         break;
                     }
             }

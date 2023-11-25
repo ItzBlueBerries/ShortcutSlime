@@ -56,7 +56,7 @@ namespace ShortcutSlimes
         {
             public static void Prefix(EconomyDirector __instance)
             {
-                __instance.baseValueMap = __instance.baseValueMap.ToArray().AddRangeToArray(ShortcutEntry.valueMapsToPatch.ToArray());
+                __instance.BaseValueMap = __instance.BaseValueMap.ToArray().AddRangeToArray(ShortcutEntry.valueMapsToPatch.ToArray());
             }
         }
 
@@ -107,7 +107,7 @@ namespace ShortcutSlimes
         {
             private static bool Prefix(SlimeEat __instance, SlimeDiet.EatMapEntry em)
             {
-                if (__instance.slimeDefinition == Get<SlimeDefinition>("Shortcut"))
+                if (__instance.SlimeDefinition == Get<SlimeDefinition>("Shortcut"))
                 {
                     IdentifiableType[] toRandomize = new IdentifiableType[]
                     {
@@ -129,7 +129,7 @@ namespace ShortcutSlimes
                     foreach (var item in list)
                         MelonLogger.Msg(item.ToString());*/
 
-                    em.producesIdent = list.RandomObject();
+                    em.ProducesIdent = list.RandomObject();
                     // SceneContext.Instance.EconomyDirector.RegisterSold(em.producesIdent, 1);
                 }
                 return true;

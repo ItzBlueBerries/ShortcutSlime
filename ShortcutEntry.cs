@@ -7,7 +7,7 @@ using MelonLoader;
 using ShortcutSlimes.Data.Slimes;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(ShortcutSlimes.ShortcutEntry), "Shortcut Slimes", "2.0", "FruitsyOG")]
+[assembly: MelonInfo(typeof(ShortcutSlimes.ShortcutEntry), "Shortcut Slimes", "2.0.1", "FruitsyOG", "https://www.nexusmods.com/slimerancher2/mods/17")]
 [assembly: MelonGame("MonomiPark", "SlimeRancher2")]
 namespace ShortcutSlimes
 {
@@ -20,7 +20,7 @@ namespace ShortcutSlimes
         { 
             // ClassInjector.RegisterTypeInIl2Cpp<AutoDepositAssistance>(); 
             // ClassInjector.RegisterTypeInIl2Cpp<DisappearOnSpawn>(); 
-            Shortcut.Initialize(); 
+            Shortcut.Initialize();
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -34,24 +34,24 @@ namespace ShortcutSlimes
                         {
                             new SlimeSet.Member()
                             {
-                                identType = Utility.Get<SlimeDefinition>("Shortcut"),
-                                prefab = Utility.Get<SlimeDefinition>("Shortcut").prefab,
-                                weight = 0.5f
+                                IdentType = Utility.Get<SlimeDefinition>("Shortcut"),
+                                _prefab = Utility.Get<SlimeDefinition>("Shortcut").prefab,
+                                Weight = 0.5f
                             }
                         };
                         IEnumerable<DirectedSlimeSpawner> source = UnityEngine.Object.FindObjectsOfType<DirectedSlimeSpawner>();
                         foreach (DirectedSlimeSpawner directedSlimeSpawner in source)
                         {
-                            foreach (DirectedActorSpawner.SpawnConstraint spawnConstraint in directedSlimeSpawner.constraints)
+                            foreach (DirectedActorSpawner.SpawnConstraint spawnConstraint in directedSlimeSpawner.Constraints)
                             {
-                                if (spawnConstraint.window.timeMode == DirectedActorSpawner.TimeMode.NIGHT)
+                                if (spawnConstraint.Window.TimeMode == DirectedActorSpawner.TimeMode.NIGHT)
                                 {
                                     foreach (SlimeSet.Member member in members)
                                     {
-                                        if (spawnConstraint.slimeset.members.Contains(member))
+                                        if (spawnConstraint.Slimeset.Members.Contains(member))
                                             continue;
 
-                                        spawnConstraint.slimeset.members = spawnConstraint.slimeset.members.AddItem(member).ToArray();
+                                        spawnConstraint.Slimeset.Members = spawnConstraint.Slimeset.Members.AddItem(member).ToArray();
                                     }
                                 }
                             }
